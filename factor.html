@@ -1,0 +1,32 @@
+
+        <h1 id="page-title">Factorization</h1>
+        <p>Enter a number to factor.</p>
+        <input type="number" id="num"> 
+        <button onClick = "changeLines()">Submit</button>
+        
+        <p id="factors">
+            
+        </p>
+        <script type>
+            function changeLines() {
+                var factors = document.getElementById("factors");
+                factors.innerHTML = "";
+                var isPrime = document.getElementById("num").value;
+                var primeFactors = [];
+                var max = Math.sqrt(isPrime);
+                var num = isPrime;
+                for (let i = 2; i <= max && num > 1; i++) {
+                    if (num % i == 0) {
+                        primeFactors.push(i);
+                        num /= i;
+                        --i;
+                    }
+                }
+                if (num > 1 && primeFactors.length)
+                    primeFactors.push(num);
+                factors.innerHTML = primeFactors.join(" * ") + " = " + isPrime + "<br>";
+                if (!primeFactors.length) {
+    factors.innerHTML = "This is a prime number<br>";
+                }
+            }
+    </script>
