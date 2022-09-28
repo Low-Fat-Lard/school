@@ -1,0 +1,52 @@
+<select id="ppm" onchange="calculatePpm()">
+    <option value="0">0</option>
+    <option value="300">300</option>
+    <option value="600">600</option>
+    <option value="1200">1200</option>
+  </select>
+  <select id="lux" onchange="calculateLux()">
+    <option value="5000">5000</option>
+    <option value="15000">15000</option>
+    <option value="25000">25000</option>
+  </select>
+
+  <button onclick="calculate()">Re-run</button>
+<p id="result"></p>
+<script>
+    var freqArr = [[[0,0],[4,3],[9,4],[13,6]],[[0,0],[9,4],[13,6],[17,6]],[[0,0],[10,5],[17,6],[19,6]]];
+
+    var Ppm = 0;
+    var Lux = 5000;
+    var lLev = 1;//hanges with light level
+    var cLev = 0;//changes with ppm
+    
+                function calculatePpm(){
+                                Ppm = document.getElementById("ppm").value;
+                                if(Ppm=='0') cLev=0;
+                                else if(Ppm=='300') cLev=1;
+                                else if(Ppm=='600') cLev=2;
+                                else if(Ppm=='1200') cLev=3;       
+                                
+                                calculate();
+                }
+                function calculateLux(){
+                                Lux = document.getElementById("lux").value;
+                               if(Lux=='5000') lLev=0;
+                                else if(Lux=='15000') lLev=1;
+                                else if(Lux=='25000') lLev=2;
+
+                                calculate();
+                }
+                function calculate(){
+                                var b1 = freqArr[lLev][cLev][0];
+                                var b2 = freqArr[lLev][cLev][1];
+                
+                                
+                                var numBubs = b1 + Math.floor(b2 * Math.random());
+                                var timeBub = Math.ceil(60000 / (numBubs+1));
+                                console.log(numBubs);
+                                console.log(timeBub);
+                                document.getElementById("result").innerHTML = numBubs;
+                }
+                calculate();
+</script>
